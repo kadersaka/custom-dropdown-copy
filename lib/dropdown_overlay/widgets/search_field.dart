@@ -8,11 +8,15 @@ class _SearchField extends StatefulWidget {
   final Duration? futureRequestDelay;
   final ValueChanged<bool>? onFutureRequestLoading;
   final ValueChanged<bool>? mayFoundResult;
+  final Color? searchFieldBackGroundColor;
+  final TextStyle? hintStyle;
 
   const _SearchField.forListData({
     Key? key,
     required this.items,
     required this.onSearchedItems,
+    this.searchFieldBackGroundColor,
+    this.hintStyle,
   })  : searchType = _SearchType.onListData,
         futureRequest = null,
         futureRequestDelay = null,
@@ -28,6 +32,8 @@ class _SearchField extends StatefulWidget {
     required this.futureRequestDelay,
     required this.onFutureRequestLoading,
     required this.mayFoundResult,
+    required this.hintStyle,
+    this.searchFieldBackGroundColor,
   })  : searchType = _SearchType.onRequestData,
         super(key: key);
 
@@ -123,34 +129,36 @@ class _SearchFieldState extends State<_SearchField> {
         controller: searchCtrl,
         decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.grey[50],
+          fillColor: widget.searchFieldBackGroundColor,
           constraints: const BoxConstraints.tightFor(height: 40),
           contentPadding: const EdgeInsets.all(8),
           hintText: 'Search',
-          hintStyle: const TextStyle(color: Colors.grey),
-          prefixIcon: const Icon(Icons.search, color: Colors.grey, size: 22),
+          hintStyle: widget.hintStyle,
+          // prefixIcon: const Icon(Icons.search, color: Colors.grey, size: 22),
+          prefixIcon:  Icon(Icons.search, color: widget.hintStyle?.color, size: 22),
           suffixIcon: GestureDetector(
             onTap: onClear,
-            child: const Icon(Icons.close, color: Colors.grey, size: 20),
+            child: Icon(Icons.close, color: widget.hintStyle?.color, size: 20),
+            // child: const Icon(Icons.close, color: Colors.grey, size: 20),
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
             borderSide: BorderSide(
-              color: Colors.grey.withOpacity(.25),
+              color: widget.hintStyle?.color?.withOpacity(.25) ??  Colors.grey.withOpacity(.25),
               width: 1,
             ),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
             borderSide: BorderSide(
-              color: Colors.grey.withOpacity(.25),
+              color: widget.hintStyle?.color?.withOpacity(.25) ??  Colors.grey.withOpacity(.25),
               width: 1,
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
             borderSide: BorderSide(
-              color: Colors.grey.withOpacity(.25),
+              color: widget.hintStyle?.color?.withOpacity(.25) ??  Colors.grey.withOpacity(.25),
               width: 1,
             ),
           ),

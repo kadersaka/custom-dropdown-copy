@@ -18,7 +18,10 @@ class _DropdownOverlay extends StatefulWidget {
   final VoidCallback hideOverlay;
   final String hintText;
   final TextStyle? headerStyle;
+  final TextStyle? hintStyle;
   final TextStyle? listItemStyle;
+  final Color? listBackGroundColor;
+  final Color? searchFieldBackGroundColor;
   final bool? excludeSelected;
   final bool? hideSelectedFieldWhenOpen;
   final bool? canCloseOutsideBounds;
@@ -37,8 +40,11 @@ class _DropdownOverlay extends StatefulWidget {
     required this.hideOverlay,
     required this.hintText,
     this.headerStyle,
+    this.hintStyle,
     this.listItemStyle,
     this.excludeSelected,
+    this.listBackGroundColor,
+    this.searchFieldBackGroundColor,
     this.canCloseOutsideBounds,
     this.hideSelectedFieldWhenOpen = false,
     this.searchType,
@@ -177,7 +183,7 @@ class _DropdownOverlayState extends State<_DropdownOverlay> {
               padding: _overlayOuterPadding,
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: widget.listBackGroundColor,
                   borderRadius: borderRadius,
                   boxShadow: [
                     BoxShadow(
@@ -250,6 +256,8 @@ class _DropdownOverlayState extends State<_DropdownOverlay> {
                                   if (!widget.hideSelectedFieldWhenOpen!)
                                     _SearchField.forListData(
                                       items: filteredItems,
+                                      hintStyle: widget.hintStyle,
+                                      searchFieldBackGroundColor: widget.searchFieldBackGroundColor,
                                       onSearchedItems: (val) {
                                         setState(() => items = val);
                                       },
@@ -265,6 +273,8 @@ class _DropdownOverlayState extends State<_DropdownOverlay> {
                                           Expanded(
                                             child: _SearchField.forListData(
                                               items: filteredItems,
+                                              hintStyle: widget.hintStyle,
+                                              searchFieldBackGroundColor: widget.searchFieldBackGroundColor,
                                               onSearchedItems: (val) {
                                                 setState(() => items = val);
                                               },
@@ -281,6 +291,8 @@ class _DropdownOverlayState extends State<_DropdownOverlay> {
                                   if (!widget.hideSelectedFieldWhenOpen!)
                                     _SearchField.forRequestData(
                                       items: filteredItems,
+                                      hintStyle: widget.hintStyle,
+                                      searchFieldBackGroundColor: widget.searchFieldBackGroundColor,
                                       onFutureRequestLoading: (val) {
                                         setState(() {
                                           isSearchRequestLoading = val;
@@ -306,6 +318,8 @@ class _DropdownOverlayState extends State<_DropdownOverlay> {
                                           Expanded(
                                             child: _SearchField.forRequestData(
                                               items: filteredItems,
+                                              hintStyle: widget.hintStyle,
+                                              searchFieldBackGroundColor: widget.searchFieldBackGroundColor,
                                               onFutureRequestLoading: (val) {
                                                 setState(() {
                                                   isSearchRequestLoading = val;
@@ -367,7 +381,7 @@ class _DropdownOverlayState extends State<_DropdownOverlay> {
           ? Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
-              color: Colors.transparent,
+              // color: Colors.transparent,
               child: child,
             )
           : child,

@@ -73,6 +73,7 @@ class _HomeState extends State<Home> {
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
+          /*
           const Text('Job Roles Dropdown', style: _labelStyle),
           const SizedBox(height: 8),
           CustomDropdown(
@@ -84,19 +85,30 @@ class _HomeState extends State<Home> {
           const SizedBox(height: 24),
           const Divider(height: 0),
           const SizedBox(height: 24),
+          */
 
           // dropdown having search field
           const Text('Job Roles Search Dropdown', style: _labelStyle),
           const SizedBox(height: 8),
           CustomDropdown.search(
             hintText: 'Select job role',
+            hintStyle: TextStyle(color: Colors.black),
             controller: jobRoleSearchDropdownCtrl,
             items: list,
+            fillColor: Colors.red,
+            listBackGroundColor: Colors.blue,
+            searchFieldBackGroundColor: Colors.blue,
+            // listItemBuilder: (ctx, itemName){
+            //   return Container(
+            //     color: Colors.blue,
+            //     child: Text(itemName),
+            //   );
+            // },
           ),
           const SizedBox(height: 24),
           const Divider(height: 0),
           const SizedBox(height: 24),
-
+/*
           // dropdown having search request field (making fake call)
           const Text('Job Roles Search Request Dropdown', style: _labelStyle),
           const SizedBox(height: 8),
@@ -152,6 +164,9 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
+          */
+
+
         ],
       ),
     );

@@ -38,6 +38,8 @@ class CustomDropdown extends StatefulWidget {
   final Function(String)? onChanged;
   final bool? excludeSelected;
   final Color? fillColor;
+  final Color? listBackGroundColor;
+  final Color? searchFieldBackGroundColor;
   final bool? canCloseOutsideBounds;
   final bool? hideSelectedFieldWhenOpen;
   final Future<List<String>> Function(String)? futureRequest;
@@ -69,6 +71,8 @@ class CustomDropdown extends StatefulWidget {
     this.onChanged,
     this.excludeSelected = true,
     this.fillColor = Colors.white,
+    this.listBackGroundColor = Colors.white,
+    this.searchFieldBackGroundColor = Colors.white,
   })  : assert(items!.isNotEmpty, 'Items list must contain at least one item.'),
         assert(
           controller.text.isEmpty || items!.contains(controller.text),
@@ -107,6 +111,8 @@ class CustomDropdown extends StatefulWidget {
     this.canCloseOutsideBounds = true,
     this.hideSelectedFieldWhenOpen = false,
     this.fillColor = Colors.white,
+    this.listBackGroundColor = Colors.white,
+    this.searchFieldBackGroundColor = Colors.white,
   })  : assert(items!.isNotEmpty, 'Items list must contain at least one item.'),
         assert(
           controller.text.isEmpty || items!.contains(controller.text),
@@ -145,6 +151,8 @@ class CustomDropdown extends StatefulWidget {
     this.canCloseOutsideBounds = true,
     this.hideSelectedFieldWhenOpen = false,
     this.fillColor = Colors.white,
+    this.listBackGroundColor = Colors.white,
+    this.searchFieldBackGroundColor = Colors.white,
   })  : assert(
           (listItemBuilder == null && listItemStyle == null) ||
               (listItemBuilder == null && listItemStyle != null) ||
@@ -188,8 +196,8 @@ class _CustomDropdownState extends State<CustomDropdown> {
           listItemBuilder: widget.listItemBuilder,
           layerLink: layerLink,
           hideOverlay: hideCallback,
-          headerStyle:
-              widget.controller.text.isNotEmpty ? selectedStyle : hintStyle,
+          headerStyle:  widget.controller.text.isNotEmpty ? selectedStyle : hintStyle,
+          hintStyle: hintStyle,
           hintText: hintText,
           listItemStyle: widget.listItemStyle,
           excludeSelected: widget.excludeSelected,
@@ -198,6 +206,8 @@ class _CustomDropdownState extends State<CustomDropdown> {
           futureRequest: widget.futureRequest,
           futureRequestDelay: widget.futureRequestDelay,
           hideSelectedFieldWhenOpen: widget.hideSelectedFieldWhenOpen,
+          searchFieldBackGroundColor: widget.searchFieldBackGroundColor,
+          listBackGroundColor: widget.listBackGroundColor,
         );
       },
       child: (showCallback) {
